@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <prerequisites>
+        <maven>3.0</maven>
+    </prerequisites>
+
+    <groupId>org.remotehome</groupId>
+    <artifactId>NetworkLoader</artifactId>
+    <version>1.0.0</version>
+
+    <name>NetworkLoader</name>
+
+    <organization>
+        <name>Remote-Home s.r.o.</name>
+        <url>http://www.wduino.com</url>
+    </organization>
+
+    <properties>
+        <!-- Project -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <!-- Maven plugins -->
+        <maven-compiler-plugin.version>3.0</maven-compiler-plugin.version>
+        <maven-dependency-plugin.version>2.7</maven-dependency-plugin.version>
+        <maven-war-plugin.version>2.3</maven-war-plugin.version>
+    </properties>
+
+    <packaging>jar</packaging>
+
+    <dependencies>
+    </dependencies>
+
+    <build>
+        <finalName>wDuino</finalName>
+        <resources>
+            <resource>
+                <directory>resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!--<addClasspath>true</addClasspath>-->
+                            <mainClass>org.remoteHome.NetworkProgramming</mainClass>
+                        </manifest>
+                        <manifestEntries>                            
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <configuration>
+                    <executable>java</executable>
+                    <mainClass>org.remoteHome.NetworkProgramming</mainClass>
+                    <classpathScope>runtime</classpathScope>
+                    <includeProjectDependencies>true</includeProjectDependencies>
+                    <arguments>
+                        <argument>${port}</argument>
+                        <argument>${serialize.filepath}</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>win</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <properties>
+                <port>8081</port>
+                <serialize.filepath>C:\Users\%username%\AppData\Local\Temp\</serialize.filepath>
+            </properties>
+        </profile>
+        <profile>
+            <id>unix</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+            <properties>
+                <port>8081</port>
+                <serialize.filepath>/tmp</serialize.filepath>
+            </properties>
+        </profile>
+    </profiles>
+    <repositories>
+        <repository>
+          <id>central</id>
+          <url>https://repo1.maven.org/maven2</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+        </repository>
+        <repository>
+            <id>eclipse-juno</id>
+            <url>http://download.eclipse.org/releases/juno</url>
+        </repository>
+        <repository>
+            <id>eclipse-kepler</id>
+            <url>http://download.eclipse.org/releases/kepler</url>
+        </repository>
+        <repository>
+            <id>repo2_maven_org</id>
+            <url>http://repo2.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>repo1_maven_org</id>
+            <url>http://repo1.maven.org</url>
+        </repository>
+        <repository>
+            <id>Sonatype snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+        <repository>
+            <id>Sonatype releases</id>
+            <url>https://oss.sonatype.org/content/repositories/releases</url>
+        </repository>
+    </repositories>
+
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>http://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+</project>

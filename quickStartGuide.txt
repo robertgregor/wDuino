@@ -1,0 +1,31 @@
+Hello,
+
+thanks to be interrested to the WDuino. Here is the quick start guide:
+
+Prerequisities:
+1. Ardunio with ATmega328 and ESP 8266 wifi chip. i.e. wDuino :)
+2. Install Arduino GUI 1.0 or later
+3. Install java 1.8 or later ( runtime is enough... )
+_________________________________________________________________________
+
+"Hello world" quick start guide:
+
+1. Download this repo to local disk either using git or download the zipfile and extract is to some directory.
+2. Copy the RemoteHomeWifi library to Arduino libraries folder: i.e.: copy C:\wDuino\sketches\libraries\* C:\arduino-1.5.8\libraries
+3. Open the arduino gui and load the C:\wDuino\sketches\sketch_deviceTemplate\sketch_deviceTemplate.ino sketch
+4. Compile the sketch.
+5. Load the sketch to your arduino. ( If you have wDuino, the sketch is already loaded. )
+6. Power your arduino.
+7. Check your wifi networks. Connect to unsecure ESP_ wifi network.
+8. Open browser and go to the 192.168.4.1. You will get the webpage with Wifi config. Put there the SSID and password. Then click configure. You will join your home network. Please note, your router should support DHCP.
+9. After some time the page displays the IP address, which the router assigned. Please reserve this address in your router.
+10. Go to the Device config. Configure there the Server IP, Server port (There the sketch is going to send the data.), Programming port - this is the port where the device will connect to get the new sketch, and Device ID to uniquely identify your device.
+11. Go to the C:\wDuino\SketchLoader_Java\Java using the command prompt.
+12. Run the sketch loader: 
+	Windows: java -jar target\wDuino.jar 8081 C:\Users\%username%\AppData\Local\Temp\
+	linux:   java -jar target/wDuino.jar 8081 /tmp
+13. You have to see the message that the sketch has been found and loaded.
+14. Go to the browser of your arduino and click the Sketch upload. After some time, you can see in the sketch loader, programming successfull message.
+15. Try to modify the sketch_deviceTemplate.ino and then compile. Then check the output of the shetch loader. The hex file is automatically re-loaded.
+
+Enjoy the fun!
